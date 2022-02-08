@@ -133,13 +133,17 @@ int Unit::beAttacked(int oppatk){
 		dmg = oppatk-def;	
 		if(guard_on) dmg = dmg/3;
 	}	
-	hp -= dmg;
+
 	if(hp <= 0){hp = 0;}
 	if(dodge_on == true){
 		int chance_to_dodge = rand()%100;
 		if(chance_to_dodge <50) return 0;
-		else if (chance_to_dodge >= 50) return dmg*2;
+		else if (chance_to_dodge >= 50) {
+		hp -= dmg*2;
+		return dmg*2;
+		}
 	}
+	hp -= dmg;
 	return dmg;	
 }
 
